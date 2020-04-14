@@ -1,0 +1,53 @@
+import java.util.Arrays;
+
+public class HeapSort {
+	
+	public static void main(String args[]) {
+		
+		int array[]= {9,8,5,3,2,1};
+		HeapSort heapsort=new HeapSort();
+		heapsort.sort(array);
+		System.out.println("Sorted Array - Heap Sorted - is:"+Arrays.toString(array));
+		
+	}
+
+	private void sort(int[] array) {
+		// TODO Auto-generated method stub
+		int size=array.length;
+		for(int i=size/2-1;i>=0;i--) 
+			heapify(array,size,i);
+		
+		for(int i=size-1;i>=0;i--) {
+			int x=array[0];
+			array[0]=array[i];
+			array[i]=x;
+			heapify(array, i, 0);
+
+		}
+		
+		
+		
+	}
+
+	private void heapify(int[] array, int heapSize, int i) {
+
+		int largest=i;
+		int leftChildIndex=2*i+1;
+		int rightChildIndex=2*i+2;
+		
+		if(leftChildIndex<heapSize && array[leftChildIndex]>array[largest])
+			largest=leftChildIndex;
+		
+		if(rightChildIndex<heapSize && array[rightChildIndex]>array[largest])
+			largest=rightChildIndex;
+		
+		if(largest!=i) {
+			int swap=array[i];
+			array[i]=array[largest];
+			array[largest]=swap;
+			heapify(array, heapSize, largest);
+		}
+		
+	}
+
+}
